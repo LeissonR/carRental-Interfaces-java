@@ -30,8 +30,8 @@ public class Invoice {
 		StringBuilder sb = new StringBuilder();
 		sb.append("INVOICE:\n");
 		sb.append("Basic payment: " + String.format("%.2f",getBasicPayment()) + "\n");
-		sb.append("Tax: " + getTax() + "\n");
-		sb.append("Total Payment: " + getTotalPayment() + "\n");
+		sb.append("Tax: " + String.format("%.2f",getTax()) + "\n");
+		sb.append("Total Payment: " + String.format("%.2f",getTotalPayment()) + "\n");
 		return sb.toString();
 	}
 

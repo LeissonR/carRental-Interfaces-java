@@ -28,20 +28,20 @@ public class Program {
 
 		System.out.print("Check-out (dd/MM/yyyy hh:mm): ");
 		LocalDateTime finish = LocalDateTime.parse(sc.nextLine(), fmt);
-		
+
 		CarRental carRental = new CarRental(start, finish, new Vehicle(carModel));
 
 		System.out.print("Enter with price per Hour: ");
 		Double pricePerHour = sc.nextDouble();
 		System.out.print("Enter with price per Day: ");
 		Double pricePerDay = sc.nextDouble();
-		
+
 		RentalService rs = new RentalService(pricePerHour, pricePerDay, new BrazilTaxService());
-		
+
 		rs.processInvoice(carRental);
-		
+
 		System.out.println(carRental.getInvoice().toString());
-		
+
 		sc.close();
 	}
 

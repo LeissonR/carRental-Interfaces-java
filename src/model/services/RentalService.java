@@ -6,7 +6,7 @@ import model.entities.CarRental;
 import model.entities.Invoice;
 
 public class RentalService {
-	
+
 	private Double pricePerHour;
 	private Double pricePerDay;
 
@@ -19,17 +19,19 @@ public class RentalService {
 	}
 
 	public void processInvoice(CarRental carRental) {
-	
-		double minutes = Duration.between(carRental.getStart(), carRental.getFinish()).toMinutes();  
-		double hours = minutes / 60.00;
-		
+
+		Double minutes = (double) Duration.between(carRental.getStart(), carRental.getFinish()).toMinutes();
+		Double hours = minutes / 60.00;
+
+		Double basicPayment;
 		if (hours <= 12.00) {
-			
+			basicPayment = pricePerHour * Math.ceil(hours);
+		} else {
+			basicPayment = pricePerDay * Math.ceil(hours / 24.00);
 		}
-		else {
-			
-		}
-		
-		carRental.setInvoice(new Invoice(50.00, 10.00));
+
+		Double tax = taxService.tax(basicPayment);
+
+		carRental.setInvoice(new Invoice(basicPayment, tax));
 	}
 }
